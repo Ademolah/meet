@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { BsTwitter } from "react-icons/bs";
+import { DiEnvato } from "react-icons/di";
 
 const SidebarLogo = () => {
     const router = useRouter()
@@ -18,7 +19,7 @@ const SidebarLogo = () => {
                 hover:bg-opacity-10 
                 cursor-pointer
     ">
-      <BsTwitter size={28} color="white" />
+      <DiEnvato size={28} color="white" />
     </div>
      );
 }
