@@ -2,16 +2,27 @@ import useLoginModal from "@/hooks/useLoginModal";
 import { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
+import useRegisterModal from "@/hooks/useRegisterModal";
 
 
 
 
 const LoginModal = () => {
     const loginModal = useLoginModal()
+    const registerModal = useRegisterModal()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+
+    const onToggle = useCallback(() => {
+        if(isLoading){
+            return
+        }
+
+        loginModal.onClose();
+        registerModal.onOpen();
+      }, [loginModal, registerModal, isLoading])
 
     const onSubmit = useCallback(async () => {
         try {
@@ -36,13 +47,29 @@ const LoginModal = () => {
                 disabled={isLoading}
             />
             <Input
+                type="password"
                 placeholder="Password"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 disabled={isLoading}
             />
         </div>
     )
+
+    const footerContent = (
+        <div className="text-neutral-400 text-center mt-4">
+          <p>First time using Meet?
+            <span 
+              onClick={onToggle} 
+              className="
+                text-white 
+                cursor-pointer 
+                hover:underline
+              "
+              > Create an account</span>
+          </p>
+        </div>
+      )
 
 
     return ( 
@@ -54,6 +81,7 @@ const LoginModal = () => {
             onClose={loginModal.onClose}
             onSubmit={onSubmit}
             body={bodyContent}
+            footer={footerContent}
         />
      );
 }
