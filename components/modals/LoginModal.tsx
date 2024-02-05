@@ -32,13 +32,13 @@ const LoginModal = () => {
             <Input
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
-                value="email"
+                value={email}
                 disabled={isLoading}
             />
             <Input
                 placeholder="Password"
                 onChange={(e) => setEmail(e.target.value)}
-                value="password"
+                value={password}
                 disabled={isLoading}
             />
         </div>
